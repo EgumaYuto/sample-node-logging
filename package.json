@@ -1,0 +1,22 @@
+{
+  "name": "sample-node-logging",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EgumaYuto/sample-node-logging.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EgumaYuto/sample-node-logging/issues"
+  },
+  "homepage": "https://github.com/EgumaYuto/sample-node-logging#readme",
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
+}
