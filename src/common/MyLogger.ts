@@ -3,9 +3,6 @@ import { Logger, getLogger, configure, addLayout } from "log4js";
 export class MyLogger {
   private logger: Logger;
   private constructor(fileName: string) {
-    // TODO log4jsの設定はドキュメントを読む
-    // log4js.configure({});
-    // https://www.npmjs.com/package/log4js
     addLayout('json', (config) => (logEvent) => {
       return JSON.stringify({
         fileName: fileName,
@@ -29,6 +26,11 @@ export class MyLogger {
     this.logger = getLogger();
   }
 
+  /**
+   * TODO どんなログを出すことが多いのか次第で出し分ける
+   * @param data 
+   * @returns 
+   */
   private formatMessage(data: any[]) : string | undefined{
     if (!data || data.length === 0) {
       return undefined
