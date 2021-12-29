@@ -1,5 +1,8 @@
-function hello(name: string): string {
-  return `Hello, ${name}!`;
-}
+import { MyLogger } from "./common/MyLogger"
 
-console.log(hello("World"));
+const logger = MyLogger.create();
+logger.debug("debug")
+logger.info("info")
+logger.warning("warning")
+logger.error("error")
+logger.critical("critical")
