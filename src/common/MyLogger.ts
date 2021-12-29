@@ -7,6 +7,7 @@ export class MyLogger {
     // log4js.configure({});
     // https://www.npmjs.com/package/log4js
     this.logger = getLogger();
+    this.logger.level = "debug"
   }
 
   public static create = () => new MyLogger();
