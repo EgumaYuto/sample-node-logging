@@ -1,15 +1,17 @@
-import { Logger, getLogger, configure, addLayout } from "log4js";
+import { Logger, getLogger, configure, addLayout, LoggingEvent } from "log4js";
+
+interface LogPayload {
+  fileName: string
+  severity: string
+  message: string
+  timestamp: Date
+}
 
 export class MyLogger {
   private logger: Logger;
   private constructor(fileName: string) {
     addLayout('json', (config) => (logEvent) => {
-      return JSON.stringify({
-        fileName: fileName,
-        severity: logEvent.level.levelStr,
-        message: this.formatMessage(logEvent.data),
-        timestamp: logEvent.startTime
-      }) + config.separator
+      return JSON.stringify(this.buildPayload(fileName, logEvent)) + config.separator
     })
     configure({
       appenders: {
@@ -27,9 +29,26 @@ export class MyLogger {
   }
 
   /**
-   * TODO どんなログを出すことが多いのか次第で出し分ける
+   * ログ出力するペイロードを組み立てる
+   * 
+   * @param fileName ファイル名
+   * @param logEvent ログイベント
+   * @returns ログ出力するペイロード
+   */
+  private buildPayload(fileName: string, logEvent: LoggingEvent) : LogPayload {
+    return {
+      fileName: fileName,
+      severity: logEvent.level.levelStr,
+      message: this.formatMessage(logEvent.data),
+      timestamp: logEvent.startTime
+    }
+  }
+
+  /**
+   * 渡されたメッセージのタイプごとに、出力を調整する
+   * 
    * @param data 
-   * @returns 
+   * @returns formated message
    */
   private formatMessage(data: any[]) : string {
     if (!data || data.length === 0) {
