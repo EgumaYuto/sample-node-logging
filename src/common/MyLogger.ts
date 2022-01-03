@@ -1,4 +1,4 @@
-import {Logger, getLogger, configure, addLayout, LoggingEvent} from "log4js";
+import { Logger, getLogger, configure, addLayout, LoggingEvent } from "log4js";
 
 interface LogPayload {
   fileName: string;
@@ -19,7 +19,7 @@ export class MyLogger {
       appenders: {
         out: {
           type: "stdout",
-          layout: {type: "json", separator: ""},
+          layout: { type: "json", separator: "" },
         },
       },
       categories: {

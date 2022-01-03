@@ -1,4 +1,4 @@
-import {MyLogger} from "./common/MyLogger";
+import { MyLogger } from "./common/MyLogger";
 
 const logger = MyLogger.create("index.ts");
 logger.debug("debug message", "debug args");

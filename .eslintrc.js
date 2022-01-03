@@ -19,7 +19,7 @@ module.exports = {
   ignorePatterns: [
     "/lib/**/*", // Ignore built files.
     ".eslintrc.js",
-    "jest.config.ts"
+    "jest.config.ts",
   ],
   plugins: ["@typescript-eslint", "import"],
   rules: {
@@ -27,4 +27,3 @@ module.exports = {
     "import/no-unresolved": 0,
   },
 };
-
