@@ -13,7 +13,6 @@ describe("MyLogger Unit Test", () => {
 
       // when
       const actual = Object.getPrototypeOf(logger).formatMessage(input);
-      console.log(actual);
 
       // then
       expect(actual).toEqual(expected);
@@ -27,7 +26,6 @@ describe("MyLogger Unit Test", () => {
 
       // when
       const actual = Object.getPrototypeOf(logger).formatMessage(input);
-      console.log(actual);
 
       // then
       expect(actual).toContain("message");
@@ -38,20 +36,34 @@ describe("MyLogger Unit Test", () => {
   describe("buildPayload Unit Test", () => {
     test.each([
       [
-        "fine name case1",
+        "case1",
         {
           data: ["message"],
           level: { levelStr: "INFO" },
           startTime: new Date("2022-01-03T06:06:39.373Z"),
         },
         {
-          fileName: "test logger",
+          fileName: "case1",
           message: "message",
           severity: "INFO",
           timestamp: new Date("2022-01-03T06:06:39.373Z"),
         },
       ],
-    ])("input : %s, output: '%s')", (fileName, logEvent, expected) => {
+      [
+        "case2",
+        {
+          data: ["message", new Error("sample error")],
+          level: { levelStr: "ERROR" },
+          startTime: new Date("2022-01-03T06:06:39.373Z")
+        },
+        {
+          fileName: "case2",
+          message: "message",
+          severity: "ERROR",
+          timestamp: new Date("2022-01-03T06:06:39.373Z"),
+        },
+      ],
+    ])("input : %s %s, output: '%s')", (fileName, logEvent, expected) => {
       // given
       const logger = MyLogger.create(fileName);
 
@@ -60,10 +72,12 @@ describe("MyLogger Unit Test", () => {
         fileName,
         logEvent
       );
-      console.log(actual);
 
       // then
-      expect(actual).toEqual(expected);
+      expect(actual.fileName).toEqual(expected.fileName);
+      expect(actual.message).toContain(expected.message);
+      expect(actual.severity).toEqual(expected.severity);
+      expect(actual.timestamp).toEqual(expected.timestamp);
     });
   });
 });
