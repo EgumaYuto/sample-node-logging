@@ -1,4 +1,4 @@
-import { Logger, getLogger, configure, addLayout, LoggingEvent } from "log4js";
+import {Logger, getLogger, configure, addLayout, LoggingEvent} from "log4js";
 
 interface LogPayload {
   fileName: string;
@@ -19,7 +19,7 @@ export class MyLogger {
       appenders: {
         out: {
           type: "stdout",
-          layout: { type: "json", separator: "" },
+          layout: {type: "json", separator: ""},
         },
       },
       categories: {
@@ -37,7 +37,7 @@ export class MyLogger {
    *
    * @param fileName ファイル名
    * @param logEvent ログイベント
-   * @returns ログ出力するペイロード
+   * @return ログ出力するペイロード
    */
   private buildPayload(fileName: string, logEvent: LoggingEvent): LogPayload {
     return {
@@ -52,8 +52,9 @@ export class MyLogger {
    * 渡されたメッセージのタイプごとに、出力を調整する
    *
    * @param data
-   * @returns formated message
+   * @return formated message
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private formatMessage(data: any[]): string {
     if (!data || data.length === 0) {
       return "";
@@ -76,22 +77,27 @@ export class MyLogger {
 
   public static create = (fileName: string) => new MyLogger(fileName);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public debug = (message: string, ...args: any[]): void => {
     this.logger.debug(message, ...args);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public info = (message: string, ...args: any[]): void => {
     this.logger.info(message, ...args);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public warning = (message: string, ...args: any[]): void => {
     this.logger.warn(message, ...args);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public error = (message: string, ...args: any[]): void => {
     this.logger.error(message, ...args);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public critical = (message: string, ...args: any[]): void => {
     this.logger.fatal(message, ...args);
   };

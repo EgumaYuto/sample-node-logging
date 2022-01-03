@@ -1,4 +1,4 @@
-import { MyLogger } from "./MyLogger";
+import {MyLogger} from "./MyLogger";
 
 describe("MyLogger Unit Test", () => {
   describe("formatMessage Unit Test", () => {
@@ -6,7 +6,7 @@ describe("MyLogger Unit Test", () => {
       [[], ""],
       [["message"], "message"],
       [["m1", "m2"], "m1, m2"],
-      [["m1", { hoge: "fuga" }], 'm1, {"hoge":"fuga"}'],
+      [["m1", {hoge: "fuga"}], "m1, {\"hoge\":\"fuga\"}"],
     ])("input : %s, output: '%s')", (input, expected) => {
       // given
       const logger = MyLogger.create("test logger");
@@ -39,7 +39,7 @@ describe("MyLogger Unit Test", () => {
         "case1",
         {
           data: ["message"],
-          level: { levelStr: "INFO" },
+          level: {levelStr: "INFO"},
           startTime: new Date("2022-01-03T06:06:39.373Z"),
         },
         {
@@ -53,8 +53,8 @@ describe("MyLogger Unit Test", () => {
         "case2",
         {
           data: ["message", new Error("sample error")],
-          level: { levelStr: "ERROR" },
-          startTime: new Date("2022-01-03T06:06:39.373Z")
+          level: {levelStr: "ERROR"},
+          startTime: new Date("2022-01-03T06:06:39.373Z"),
         },
         {
           fileName: "case2",
@@ -69,8 +69,8 @@ describe("MyLogger Unit Test", () => {
 
       // when
       const actual = Object.getPrototypeOf(logger).buildPayload(
-        fileName,
-        logEvent
+          fileName,
+          logEvent,
       );
 
       // then
