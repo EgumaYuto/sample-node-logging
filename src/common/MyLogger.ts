@@ -31,18 +31,20 @@ export class MyLogger {
    * @param data 
    * @returns 
    */
-  private formatMessage(data: any[]) : string | undefined{
+  private formatMessage(data: any[]) : string {
     if (!data || data.length === 0) {
-      return undefined
+      return ''
     }
     let message = ''
     const separator = ', '
     for (let index = 0; index < data.length; index++) {
-      if (data[index] instanceof Error) {
-        const d = data[index]
+      const d = data[index]
+      if (d instanceof Error) {
         message += d.stack
+      } else if (typeof d === 'string') {
+        message += d
       } else {
-        message += data[index]
+        message += JSON.stringify(d)
       }
       message += separator
     }
