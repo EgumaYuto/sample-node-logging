@@ -6,7 +6,7 @@ describe("MyLogger Unit Test", () => {
       [[], ""],
       [["message"], "message"],
       [["m1", "m2"], "m1, m2"],
-      [["m1", { hoge: "fuga" }], "m1, {\"hoge\":\"fuga\"}"],
+      [["m1", { hoge: "fuga" }], "m1, " + JSON.stringify({ hoge: "fuga" })],
     ])("input : %s, output: '%s')", (input, expected) => {
       // given
       const logger = MyLogger.create("test logger");
